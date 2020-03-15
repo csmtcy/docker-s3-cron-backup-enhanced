@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  my-backup-unit:
+    build: .
+    container_name: s3-cron-backup-enhanced
+    environment:
+      - AWS_ACCESS_KEY_ID=QWKENQKLQWEJ
+      - AWS_SECRET_ACCESS_KEY=SKDFJSLKFJLSKDJFKLKSD
+      - S3_BUCKET_URL=s3://pathname/
+      - AWS_DEFAULT_REGION=sgp1
+      - CRON_SCHEDULE=0 2 * * * # run daily on 2am
+      - BACKUP_NAME=backup-name
+      - AWS_ENDPOINT_URL=https://sgp1.digitaloceanspaces.com
+    volumes:
+      - .:/data:ro #use ro to make sure the volume gets mounted read-only
+    restart: always
+
